@@ -1,8 +1,6 @@
 ## Thoughts:
 # Support column summing?
 module Tablinate
-#  initalizer "tablinate" do |app|
-#  end
   def self.parse_table_parameters(params={})
   end
   ## A method that determines whether or not to apply params to a tag.
@@ -30,7 +28,7 @@ module Tablinate
     thead = generate_tag("thead", params)
     thead += generate_tag("tr", params[:thead])
     keys.each do |key|
-      thead += "#{generate_tag("td", params[:thead])}#{key}</td>"
+      thead += "#{generate_tag("th", params[:thead])}#{key}</th>"
     end
     thead += "</thead>"
     return thead
@@ -48,30 +46,28 @@ module Tablinate
       tbody +="</tr>"
     end
     tbody +="</tbody>"
+    return tbody
   end
   #the extraneous args are excluded columns?
   def self.generate_table(object, params, *args)
     thead = table_head(object[0].keys, params[:thead])
-    tbody = table_body(object, params)
-    raise tbody.inspect
-      
-    objects[0].attributes.keys.collect{ |key| }
-    objects.each do |object|
-      
-    end
+    tbody = table_body(object, params)   
+    html = "<table>"+thead+tbody+"</table>"
+    return html
+    puts params[:table]
   end
 end
-table_params = { 
-  :table => { :class => "eek", :id => 'rawr' },
-  :tbody => {
-    :tr => { :class => [ 'class1', 'class2', 'class3' ], :id => 'meow' },
-    :td => { :class => 'rawr', :id => [1,2,3] }
-  }
-}
-table = [
-  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
-]
-Tablinate.generate_table table, table_params
+#table_params = { 
+#  :table => { :class => "eek", :id => 'rawr' },
+#  :tbody => {
+#    :tr => { :class => [ 'class1', 'class2', 'class3' ], :id => 'meow' },
+#    :td => { :class => 'rawr', :id => [1,2,3] }
+#  }
+#}
+#table = [
+#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
+#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
+#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
+#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
+#]
+#Tablinate.generate_table table, table_params
