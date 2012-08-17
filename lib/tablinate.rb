@@ -51,10 +51,19 @@ module Tablinate
   #the extraneous args are excluded columns?
   def self.generate_table(object, params, *args)
     thead = table_head(object[0].keys, params[:thead])
-    tbody = table_body(object, params)   
-    html = "<table>"+thead+tbody+"</table>"
-    return html
-    puts params[:table]
+    tbody = table_body(object, params)    
+    #account for table options
+    if params[:table].nil?
+      html = "<table>"+thead+tbody+"</table>"
+      return html
+    else
+      html = "<table "
+      params[:table].each do |k,v|
+        html += "#{k}='#{v}',"
+      end
+      html += ">"+thead+tbody+"</table>"
+      return html
+    end
   end
 end
 #table_params = { 
