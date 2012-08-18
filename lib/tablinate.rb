@@ -10,6 +10,7 @@ module Tablinate
     unless params.nil? || params[tag.to_sym].nil?
       html = "<#{tag}"
       params[tag.to_sym].each do |k,v|
+        next if v.class == Hash
         if v.class==[].class
           ## mod #{v.count}
           adjusted_offset = offset % v.count
@@ -50,20 +51,13 @@ module Tablinate
   end
   #the extraneous args are excluded columns?
   def self.generate_table(object, params, *args)
-    thead = table_head(object[0].keys, params[:thead])
-    tbody = table_body(object, params)    
-    #account for table options
-    if params[:table].nil?
-      html = "<table>"+thead+tbody+"</table>"
-      return html
-    else
-      html = "<table "
-      params[:table].each do |k,v|
-        html += "#{k}='#{v}',"
-      end
-      html += ">"+thead+tbody+"</table>"
-      return html
-    end
+    table = generate_tag("table", params)
+    #thead
+    table += table_head(object[0].keys, params[:thead])
+    #tbody
+    table += table_body(object, params)    
+    #tfoot?
+    table += "</table>"
   end
 end
 #table_params = { 
@@ -79,4 +73,4 @@ end
 #  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
 #  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
 #]
-#Tablinate.generate_table table, table_params
+#puts Tablinate.generate_table table, table_params
