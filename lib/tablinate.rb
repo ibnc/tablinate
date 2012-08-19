@@ -36,15 +36,17 @@ module Tablinate
   end
   def self.table_body(rows, params)
     tbody = generate_tag("tbody", params)
+    tr_i = 0
     rows.each do |row|
-      tbody += generate_tag("tr", params[:tbody])
-        i = 0
+      tbody += generate_tag("tr", params[:tbody], tr_i)
+        td_i = 0
         #there needs to be some way to determinte the max offset and reset back to 0 when that number is reached. 
         row.each do |k,v|
-          tbody += "#{generate_tag("td", params[:tbody], i)}#{v}</td>"
-          i += 1
+          tbody += "#{generate_tag("td", params[:tbody], td_i)}#{v}</td>"
+          td_i += 1
         end
       tbody +="</tr>"
+      tr_i += 1
     end
     tbody +="</tbody>"
     return tbody
@@ -60,17 +62,3 @@ module Tablinate
     table += "</table>"
   end
 end
-#table_params = { 
-#  :table => { :class => "eek", :id => 'rawr' },
-#  :tbody => {
-#    :tr => { :class => [ 'class1', 'class2', 'class3' ], :id => 'meow' },
-#    :td => { :class => 'rawr', :id => [1,2,3] }
-#  }
-#}
-#table = [
-#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-#  { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
-#]
-#puts Tablinate.generate_table table, table_params
