@@ -52,6 +52,18 @@ module Tablinate
     return tbody
   end
   #the extraneous args are excluded columns?
+  def self.format_html(html)
+    html.split('')
+    tags = html.scan(%r{</?[^>]+?>}).uniq
+    tags.each do |tag|
+      if tag.length > 5 || tag.include?("/") || tag.include?("tr>")
+        html = html.gsub(tag,"#{tag}\n") 
+      else
+        html = html.gsub(tag,"\s\s#{tag}")
+      end
+    end
+    return html
+  end
   def self.generate_table(object, params, *args)
     table = generate_tag("table", params)
     #thead
@@ -60,5 +72,6 @@ module Tablinate
     table += table_body(object, params)    
     #tfoot?
     table += "</table>"
+    table = format_html(table)
   end
 end
