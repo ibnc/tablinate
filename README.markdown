@@ -93,7 +93,7 @@ Tablinate is configurable via an options hash passed with the object being tabli
     %body
       =Tablinate.generate_table(@employees, {:table => {:border => 1, :class => 'fluid'}})
 
-### 3) view-source:http://localhost:4567/
+### view-source:http://localhost:4567/
 
     <body>
       <table border='1' class='fluid'>
