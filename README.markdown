@@ -11,6 +11,10 @@
 
 A gem that takes hashes or active record objects and converts them into tables in a view file.
 
+## Install
+
+    gem install tablinate
+
 ## Sample Sinatra Code:
 
 ### 1) app.rb
@@ -80,8 +84,5 @@ A gem that takes hashes or active record objects and converts them into tables i
       </table>
     </body>
 
-## Install
-
-    gem install tablinate
 
 
