@@ -24,7 +24,7 @@ A gem that takes hashes or active record objects and converts them into tables i
         { :id => '2', :first_name => "Kevin", :last_name => "Collette", :title => "Programmer" },
         { :id => '3', :first_name => "David", :last_name => "Hahn", :title => "System Administrator" },
         { :id => '4', :first_name => "Brad", :last_name => "Rice", :title => "System Administrator" },
-        { :id => '4', :first_name => "Roy", :last_name => "Mereness", :title => "IT Director" }
+        { :id => '5', :first_name => "Roy", :last_name => "Mereness", :title => "IT Director" }
       ] 
       haml :index
     end
