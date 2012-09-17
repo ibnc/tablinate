@@ -1,4 +1,4 @@
-# Tablinate
+# tablinate
 
 * Code: [http://github.com/unholydh/tablinate](http://github.com/unholydh/tablinate)
 
@@ -9,7 +9,7 @@
 
 ## Description
 
-A gem that takes hashes or active record objects and converts them into tables in a view file.
+tablinate is a ruby gem that takes hashes or active record objects and converts them into tables in a view file. It is intended for use in small projects or applications whose schemas are closely related to what a table's output should be.
 
 ## Install
 
