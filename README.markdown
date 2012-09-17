@@ -19,12 +19,12 @@ A gem that takes hashes or active record objects and converts them into tables i
     require 'tablinate'
 
     get '/' do
-      @guests = [
-        { :id => '1', :first_name => "Kyle", :last_name => "Carter", :room => "15A" },
-        { :id => '2', :first_name => "Kevin", :last_name => "Collette", :room => "15B" },
-        { :id => '3', :first_name => "David", :last_name => "Hahn", :room => "15C" },
-        { :id => '4', :first_name => "Brad", :last_name => "Rice", :room => "16A" },
-        { :id => '5', :first_name => "Roy", :last_name => "Mereness", "room => "16B" }
+      @employees = [
+        { :id => '1', :first_name => "Kyle", :last_name => "Carter", :title => "Programmer" },
+        { :id => '2', :first_name => "Kevin", :last_name => "Collette", :title => "Programmer" },
+        { :id => '3', :first_name => "David", :last_name => "Hahn", :title => "System Administrator" },
+        { :id => '4', :first_name => "Brad", :last_name => "Rice", :title => "System Administrator" }
+        { :id => '4', :first_name => "Roy", :last_name => "Mereness", :title => "IT Director" }
       ] 
       haml :index
     end
