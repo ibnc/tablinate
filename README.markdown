@@ -91,7 +91,7 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
 ### views/index.haml
 
     %body
-      =Tablinate.generate_table(@employees, {:table => {:border => 1, :class => 'fluid'}})
+      =Tablinate.generate_table(@employees, { :table => { :border => 1, :class => 'fluid' }, :tbody => { :class => 'foo' } } )
 
 ### view-source:http://localhost:4567/
 
@@ -104,7 +104,7 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
         <th>last_name</th>
         <th>title</th>
       </thead>
-      <tbody>
+      <tbody class ='foo'>
       <tr>
         <td>1</td>
         <td>Kyle</td>
