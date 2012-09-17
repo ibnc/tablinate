@@ -104,7 +104,7 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
         <th>last_name</th>
         <th>title</th>
       </thead>
-      <tbody class ='foo'>
+      <tbody class='foo'>
       <tr>
         <td>1</td>
         <td>Kyle</td>
