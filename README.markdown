@@ -38,7 +38,7 @@ A gem that takes hashes or active record objects and converts them into tables i
     %body
       =Tablinate.generate_table(@employees, {})
 
-### 3) source output
+### 3) view-source:http://localhost:4567/
 
     <body>
       <table>
