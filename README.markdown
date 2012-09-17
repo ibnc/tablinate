@@ -84,5 +84,30 @@ A gem that takes hashes or active record objects and converts them into tables i
       </table>
     </body>
 
+## Options
 
+Tablinate is configurable via an options hash passed with the object being tablinated. The hash can style the table or add classes to it. For example:
 
+### views/index.haml
+
+    %body
+      =Tablinate.generate_table(@employees, {:table => {:border => 1, :class => 'fluid'}})
+
+### 3) view-source:http://localhost:4567/
+
+    <body>
+      <table border='1' class='fluid'>
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>title</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>Kyle</td>
+        ...
+        ...
+      
