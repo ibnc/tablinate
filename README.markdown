@@ -36,49 +36,49 @@ A gem that takes hashes or active record objects and converts them into tables i
 
 ### 3) output
 
-<body>
-  <table>
-  <thead>
-  <tr>
-    <th>id</th>
-    <th>first_name</th>
-    <th>last_name</th>
-    <th>title</th>
-  </thead>
-  <tbody>
-  <tr>
-    <td>1</td>
-    <td>Kyle</td>
-    <td>Carter</td>
-    <td>Programmer</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Kevin</td>
-    <td>Collette</td>
-    <td>Programmer</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>David</td>
-    <td>Hahn</td>
-    <td>System Administrator</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Brad</td>
-    <td>Rice</td>
-    <td>System Administrator</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Roy</td>
-    <td>Mereness</td>
-    <td>IT Director</td>
-  </tr>
-  </tbody>
-  </table>
-</body>
+    <body>
+      <table>
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>title</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>Kyle</td>
+        <td>Carter</td>
+        <td>Programmer</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Kevin</td>
+        <td>Collette</td>
+        <td>Programmer</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>David</td>
+        <td>Hahn</td>
+        <td>System Administrator</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Brad</td>
+        <td>Rice</td>
+        <td>System Administrator</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Roy</td>
+        <td>Mereness</td>
+        <td>IT Director</td>
+      </tr>
+      </tbody>
+      </table>
+    </body>
 
 ## Install
 
