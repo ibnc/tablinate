@@ -86,7 +86,7 @@ tablinate is a ruby gem that takes hashes or active record objects and converts 
 
 ## Options
 
-Tablinate is configurable via an options hash passed with the object being tablinated. The hash can style the table or add classes to it. For example:
+Because it uses normal html markup, tablinated tables are easily styled using CSS, Sass, etc. That being said, tablinate is configurable via an options hash. The hash can style the table or add classes to it. For example:
 
 ### views/index.haml
 
