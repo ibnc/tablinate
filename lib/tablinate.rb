@@ -51,8 +51,10 @@ module Tablinate
     tbody +="</tbody>"
     return tbody
   end
-  #the extraneous args are excluded columns?
   def self.format_html(html)
+  #Finds html tags via regex and adds whitespace so
+  #that the table doesn't look disgusting in the 
+  #source code.
     html.split('')
     tags = html.scan(%r{</?[^>]+?>}).uniq
     tags.each do |tag|
