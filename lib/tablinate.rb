@@ -66,7 +66,7 @@ module Tablinate
     end
     return html
   end
-  def self.generate_table(object, params, *args)
+  def self.generate_table(object, params)
     table = generate_tag("table", params)
     #thead
     table += table_head(object[0].keys, params[:thead])
