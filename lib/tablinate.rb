@@ -67,7 +67,7 @@ module Tablinate
     return html
   end
   def self.generate_table(object, *args)
-    object = object.collect{ |x| x.attributes } unless object.class == Hash
+    object = object.collect{ |x| x.attributes } unless object[0].class == Hash
     params = args[0]
     table = generate_tag("table", params)
     #thead
