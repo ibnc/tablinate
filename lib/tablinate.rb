@@ -5,7 +5,6 @@ module Tablinate
   end
   ## A method that determines whether or not to apply params to a tag.
   ## If they are to be applied, apply
-  #TODO: get a better function name
   def self.generate_tag(tag, params, offset=0)
     unless params.nil? || params[tag.to_sym].nil?
       html = "<#{tag}"
@@ -35,6 +34,7 @@ module Tablinate
     return thead
   end
   def self.table_body(rows, params)
+    params = {} if params.nil?
     tbody = generate_tag("tbody", params)
     tr_i = 0
     rows.each do |row|
@@ -66,10 +66,12 @@ module Tablinate
     end
     return html
   end
-  def self.generate_table(object, params)
+  def self.generate_table(object, *args)
+    object = object.collect{ |x| x.attributes } unless object.class == Hash
+    params = args[0]
     table = generate_tag("table", params)
     #thead
-    table += table_head(object[0].keys, params[:thead])
+    table += table_head(object[0].keys, params)
     #tbody
     table += table_body(object, params)    
     #tfoot?

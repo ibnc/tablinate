@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'tablinate'
-  s.version     = '0.0.0'
+  s.version     = '0.7.0'
   s.date        = '2012-08-13'
   s.summary     = "Generate html tables with activerecord objects!"
   s.description = "..."

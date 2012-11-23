@@ -24,11 +24,11 @@ tablinate is a ruby gem that takes hashes or active record objects and converts 
 
     get '/' do
       @employees = [
-        { :id => '1', :first_name => "Kyle", :last_name => "Carter", :title => "Programmer" },
-        { :id => '2', :first_name => "Kevin", :last_name => "Collette", :title => "Programmer" },
-        { :id => '3', :first_name => "David", :last_name => "Hahn", :title => "System Administrator" },
-        { :id => '4', :first_name => "Brad", :last_name => "Rice", :title => "System Administrator" },
-        { :id => '5', :first_name => "Roy", :last_name => "Mereness", :title => "IT Director" }
+        { :id => '1', :first_name => "Matt", :last_name => "Smith", :title => "Time Lord" },
+        { :id => '2', :first_name => "Jack", :last_name => "Harkness", :title => "Time Agent" },
+        { :id => '3', :first_name => "Tom", :last_name => "Baker", :title => "Time Lord" },
+        { :id => '4', :first_name => "David", :last_name => "Tennant", :title => "Time Lord" },
+        { :id => '5', :first_name => "Christopher", :last_name => "Eccleston", :title => "Time Lord" }
       ] 
       haml :index
     end
@@ -52,33 +52,33 @@ tablinate is a ruby gem that takes hashes or active record objects and converts 
       <tbody>
       <tr>
         <td>1</td>
-        <td>Kyle</td>
-        <td>Carter</td>
-        <td>Programmer</td>
+        <td>Matt</td>
+        <td>Smith</td>
+        <td>Time Lord</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>Kevin</td>
-        <td>Collette</td>
-        <td>Programmer</td>
+        <td>Jack</td>
+        <td>Harkness</td>
+        <td>Time Agent</td>
       </tr>
       <tr>
         <td>3</td>
-        <td>David</td>
-        <td>Hahn</td>
-        <td>System Administrator</td>
+        <td>Tom</td>
+        <td>Baker</td>
+        <td>Time Lord</td>
       </tr>
       <tr>
         <td>4</td>
-        <td>Brad</td>
-        <td>Rice</td>
-        <td>System Administrator</td>
+        <td>David</td>
+        <td>Tennant</td>
+        <td>Time Lord</td>
       </tr>
       <tr>
         <td>5</td>
-        <td>Roy</td>
-        <td>Mereness</td>
-        <td>IT Director</td>
+        <td>Christopher</td>
+        <td>Eccleston</td>
+        <td>Time Lord</td>
       </tr>
       </tbody>
       </table>
@@ -107,7 +107,12 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
       <tbody class='foo'>
       <tr>
         <td>1</td>
-        <td>Kyle</td>
+        <td>Matt</td>
         ...
         ...
-      
+### Haml note
+
+When using haml, you may need to unescape html tags by: 
+
+    %body
+      != Tablinate.generate_table(...
