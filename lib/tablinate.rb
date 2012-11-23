@@ -74,6 +74,10 @@ module Tablinate
     table += table_body(object, params)    
     #tfoot?
     table += "</table>"
-    table = format_html(table)
+    begin
+      format_html(table)
+    rescue
+      table
+    end
   end
 end
