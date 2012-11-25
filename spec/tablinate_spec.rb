@@ -18,7 +18,7 @@ describe Tablinate do
     tag.should == "<tr class='meow'>"
   end
   it "should generate table header" do
-    thead = Tablinate.table_head(@employees[0].keys, @params[:thead])
+    thead = Tablinate.table_head(@employees[0].keys, @params)
     thead.should == "<thead><tr><th>id</th><th>first_name</th><th>last_name</th><th>title</th></thead>"
   end
   it "should generate table body" do

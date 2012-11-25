@@ -11,7 +11,7 @@ module Tablinate
       params[tag.to_sym].each do |k,v|
         next if v.class == Hash
         if v.class==[].class
-          ## mod #{v.count}
+          ## (mod #{v.count})
           adjusted_offset = offset % v.count
           html+= " #{k}='#{v[adjusted_offset]}'"
         else
@@ -24,23 +24,20 @@ module Tablinate
     end
   end
   def self.table_head(keys, params)
-    params = {} if params.nil?
     thead = generate_tag("thead", params)
     thead += generate_tag("tr", params[:thead])
     keys.each do |key|
       thead += "#{generate_tag("th", params[:thead])}#{key}</th>"
     end
-    thead += "</thead>"
+    thead += "</tr></thead>"
     return thead
   end
   def self.table_body(rows, params)
-    params = {} if params.nil?
     tbody = generate_tag("tbody", params)
     tr_i = 0
     rows.each do |row|
       tbody += generate_tag("tr", params[:tbody], tr_i)
         td_i = 0
-        #there needs to be some way to determinte the max offset and reset back to 0 when that number is reached. 
         row.each do |k,v|
           tbody += "#{generate_tag("td", params[:tbody], td_i)}#{v}</td>"
           td_i += 1
@@ -66,9 +63,9 @@ module Tablinate
     end
     return html
   end
-  def self.generate_table(object, *args)
+  def self.generate_table(object, params={})
+    #turns an ActiveRecord::Relation into an array of hashes.
     object = object.collect{ |x| x.attributes } unless object[0].class == Hash
-    params = args[0]
     table = generate_tag("table", params)
     #thead
     table += table_head(object[0].keys, params)

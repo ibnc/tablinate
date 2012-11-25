@@ -9,7 +9,7 @@
 
 ## Description
 
-tablinate is a ruby gem that takes hashes or active record objects and converts them into tables in a view file. It is intended for use in small projects or applications whose schemas are closely related to what a table's output should be.
+tablinate is a ruby gem that takes arrays of hashes or active record objects and converts them into tables in a view file. It is intended for use in small projects or applications whose schemas are closely related to what a table's output should be.
 
 ## Install
 
@@ -36,7 +36,7 @@ tablinate is a ruby gem that takes hashes or active record objects and converts 
 ### 2) views/index.haml
 
     %body
-      =Tablinate.generate_table(@employees, {})
+      =Tablinate.generate_table(@employees)
 
 ### 3) view-source:http://localhost:4567/
 
@@ -110,6 +110,56 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
         <td>Matt</td>
         ...
         ...
+### Further notes on options
+Options are highly expandable, and support many useful notations. For example:
+     @table_params = {
+      :table => { :class => "eek", :id => 'rawr' },
+      :tbody => {
+        :tr => { :class => [ 'class1', 'class2', 'class3' ], :id => 'meow' },
+        :td => { :class => 'rawr', :id => [1,2,3] }
+      }
+    }
+    @table = [
+      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
+      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
+      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
+      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
+    ]
+
+    Tablinate.generate_table(@table, @table_params)
+
+    <table class='eek' id='rawr'>
+    <table>
+    <thead>
+      <tr>
+        <th>column1</th>
+        <th>column2</th>
+        <th>column3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class='class1' id='meow'>
+        <td class='rawr' id='1value1</td>
+        <td class='rawr' id='2value2</td>
+        <td class='rawr' id='3value3</td>
+      </tr>
+        <tr class='class2' id='meow'>
+        <td class='rawr' id='1value1</td>
+        <td class='rawr' id='2value2</td>
+        <td class='rawr' id='3value3</td>
+      </tr>
+      <tr class='class3' id='meow'>
+        <td class='rawr' id='1value1</td>
+        <td class='rawr' id='2value2</td>
+        <td class='rawr' id='3'>value3</td>
+      </tr>
+      <tr class='class1' id='meow'>
+        <td class='rawr' id='1'>value1</td>
+        <td class='rawr' id='2'>value2</td>
+        <td class='rawr' id='3'>value3</td>
+      </tr>
+    </tbody>
+    </table>
 ### Haml note
 
 When using haml, you may need to unescape html tags by: 
