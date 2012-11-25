@@ -112,7 +112,7 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
         ...
 ### Further notes on options
 Options are highly expandable, and support many useful notations. For example:
-     @table_params = {
+    @table_params = {
       :table => { :class => "eek", :id => 'rawr' },
       :tbody => {
         :tr => { :class => [ 'class1', 'class2', 'class3' ], :id => 'meow' },
