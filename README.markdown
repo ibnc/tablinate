@@ -111,7 +111,9 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
         ...
         ...
 ### Further notes on options
+
 Options are highly expandable, and support many useful notations. For example:
+
     @table_params = {
       :table => { :class => "eek", :id => 'rawr' },
       :tbody => {
@@ -125,9 +127,9 @@ Options are highly expandable, and support many useful notations. For example:
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
     ]
-
+    
     Tablinate.generate_table(@table, @table_params)
-
+    
     <table class='eek' id='rawr'>
     <table>
     <thead>
