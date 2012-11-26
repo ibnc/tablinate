@@ -65,7 +65,7 @@ module Tablinate
   end
   def self.generate_table(object, params={})
     #turns an ActiveRecord::Relation into an array of hashes.
-    object = object.collect{ |x| x.attributes } unless object[0].class == Array
+    object = object.collect{ |x| x.attributes } unless object.class == Array
     table = generate_tag("table", params)
     #thead
     table += table_head(object[0].keys, params)
