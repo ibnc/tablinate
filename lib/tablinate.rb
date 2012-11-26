@@ -1,3 +1,4 @@
+require 'json'
 require File.dirname(__FILE__)+'/html.rb'
 ## Thoughts:
 # Support column summing?
@@ -6,6 +7,7 @@ module Tablinate
   end
   def self.generate_table(object, params={})
     #turns an ActiveRecord::Relation into an array of hashes.
+    JSON.parse(object) if object.class == String
     object = object.collect{ |x| x.attributes } unless object[0].class == Hash
     table = HTML::Tag.generate_tag("table", params)
     #thead

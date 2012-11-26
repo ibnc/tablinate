@@ -14,7 +14,7 @@ describe HTML do
     @params = {:table => {:border => 1, :class => 'fluid'}, :tbody => {:class => 'foo', :tr => {:class => 'meow'}}}
   end
   it "should generate tag" do
-    tag = HTML::Tag.generate_tag("tr", @params[:tbody])
+    tag = HTML::Tag.generate("tr", @params[:tbody])
     tag.should == "<tr class='meow'>"
   end
   it "should generate table header" do

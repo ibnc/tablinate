@@ -1,6 +1,6 @@
 module HTML
   class Tag
-    def self.generate_tag(tag, params, offset=0)
+    def self.generate(tag, params, offset=0)
       unless params.nil? || params[tag.to_sym].nil?
         html = "<#{tag}"
         params[tag.to_sym].each do |k,v|
@@ -19,22 +19,22 @@ module HTML
       end
     end
     def self.table_head(keys, params)
-      thead = generate_tag("thead", params)
-      thead += generate_tag("tr", params[:thead])
+      thead = generate("thead", params)
+      thead += generate("tr", params[:thead])
       keys.each do |key|
-        thead += "#{generate_tag("th", params[:thead])}#{key}</th>"
+        thead += "#{generate("th", params[:thead])}#{key}</th>"
       end
       thead += "</tr></thead>"
       return thead
     end
     def self.table_body(rows, params)
-      tbody = generate_tag("tbody", params)
+      tbody = generate("tbody", params)
       tr_i = 0
       rows.each do |row|
-        tbody += generate_tag("tr", params[:tbody], tr_i)
+        tbody += generate("tr", params[:tbody], tr_i)
           td_i = 0
           row.each do |k,v|
-            tbody += "#{generate_tag("td", params[:tbody], td_i)}#{v}</td>"
+            tbody += "#{generate("td", params[:tbody], td_i)}#{v}</td>"
             td_i += 1
           end
         tbody +="</tr>"
