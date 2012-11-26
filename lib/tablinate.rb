@@ -10,7 +10,7 @@ module Tablinate
       html = "<#{tag}"
       params[tag.to_sym].each do |k,v|
         next if v.class == Hash
-        if v.class==[].class
+        if v.class == Array
           ## (mod #{v.count})
           adjusted_offset = offset % v.count
           html+= " #{k}='#{v[adjusted_offset]}'"
@@ -65,7 +65,7 @@ module Tablinate
   end
   def self.generate_table(object, params={})
     #turns an ActiveRecord::Relation into an array of hashes.
-    object = object.collect{ |x| x.attributes } unless object[0].class == Hash
+    object = object.collect{ |x| x.attributes } unless object[0].class == Array
     table = generate_tag("table", params)
     #thead
     table += table_head(object[0].keys, params)
