@@ -19,7 +19,7 @@ describe Tablinate do
   end
   it "should generate table header" do
     thead = Tablinate.table_head(@employees[0].keys, @params)
-    thead.should == "<thead><tr><th>id</th><th>first_name</th><th>last_name</th><th>title</th></thead>"
+    thead.should == "<thead><tr><th>id</th><th>first_name</th><th>last_name</th><th>title</th></tr></thead>"
   end
   it "should generate table body" do
     tbody = Tablinate.table_body(@employees, @params)
