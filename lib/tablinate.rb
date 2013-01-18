@@ -8,7 +8,7 @@ module Tablinate
     #turns an ActiveRecord::Relation into an array of hashes.
     object = JSON.parse(object) if object.class == String
     object = object.collect{ |x| x.attributes } unless object.class == Array
-    table = HTML::Tag.generate_tag("table", params)
+    table = HTML::Tag.generate("table", params)
     #thead
     table += HTML::Tag.table_head(object[0].keys, params)
     #tbody
