@@ -9,7 +9,7 @@
 
 ## Description
 
-tablinate is a ruby gem that takes arrays of hashes or active record objects and converts them into tables in a view file. It is intended for use in small projects or applications whose schemas are closely related to what a table's output should be.
+Tablinate is a ruby gem that takes arrays of hashes, ActiveRecord::Relation objects, or a JSON array of hashes, and converts them into html tables. It is intended for use in small projects or applications whose schemas are closely related to what a table's output should be.
 
 ## Install
 
@@ -115,10 +115,10 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
 Options are highly expandable, and support many useful notations. For example:
 
     @table_params = {
-      :table => { :class => "eek", :id => 'rawr' },
+      :table => { :class => "table" },
       :tbody => {
         :tr => { :class => [ 'class1', 'class2', 'class3' ], :id => 'meow' },
-        :td => { :class => 'rawr', :id => [1,2,3] }
+        :td => { :class => 'row', :id => [1,2,3] }
       }
     }
     @table = [
@@ -130,8 +130,7 @@ Options are highly expandable, and support many useful notations. For example:
     
     Tablinate.generate_table(@table, @table_params)
     
-    <table class='eek' id='rawr'>
-    <table>
+    <table class='table'>
     <thead>
       <tr>
         <th>column1</th>
@@ -141,24 +140,24 @@ Options are highly expandable, and support many useful notations. For example:
     </thead>
     <tbody>
       <tr class='class1' id='meow'>
-        <td class='rawr' id='1value1</td>
-        <td class='rawr' id='2value2</td>
-        <td class='rawr' id='3value3</td>
+        <td class='row' id='1'>value1</td>
+        <td class='row' id='2'>value2</td>
+        <td class='row' id='3'>value3</td>
       </tr>
         <tr class='class2' id='meow'>
-        <td class='rawr' id='1value1</td>
-        <td class='rawr' id='2value2</td>
-        <td class='rawr' id='3value3</td>
+        <td class='row' id='1'>value1</td>
+        <td class='row' id='2'>value2</td>
+        <td class='row' id='3'>value3</td>
       </tr>
       <tr class='class3' id='meow'>
-        <td class='rawr' id='1value1</td>
-        <td class='rawr' id='2value2</td>
-        <td class='rawr' id='3'>value3</td>
+        <td class='row' id='1'>value1</td>
+        <td class='row' id='2'>value2</td>
+        <td class='row' id='3'>value3</td>
       </tr>
       <tr class='class1' id='meow'>
-        <td class='rawr' id='1'>value1</td>
-        <td class='rawr' id='2'>value2</td>
-        <td class='rawr' id='3'>value3</td>
+        <td class='row' id='1'>value1</td>
+        <td class='row' id='2'>value2</td>
+        <td class='row' id='3'>value3</td>
       </tr>
     </tbody>
     </table>
