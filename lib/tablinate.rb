@@ -4,22 +4,11 @@ require File.dirname(__FILE__)+'/html.rb'
 # Support column summing?
 module Tablinate
 
-  def self.generate_table(object, params={})
+  def self.generate_table(objects, params={})
     #turns an ActiveRecord::Relation into an array of hashes.
-    object = JSON.parse(object) if object.class == String
-    object = object.collect{ |x| x.attributes } unless object.class == Array
-    table = HTML::Tag.generate("table", params)
-    #thead
-    table += HTML::Tag.table_head(object[0].keys, params)
-    #tbody
-    table += HTML::Tag.table_body(object, params)    
-    #tfoot?
-    table += "</table>"
-    begin
-      HTML.format_html(table)
-    rescue Exception 
-      table
-    end
+    objects = JSON.parse(objects) if objects.class == String
+    objects = objects.collect{ |x| x.attributes } unless objects.class == Array
+    table = HTML.table(objects, params)
   end
 
 end

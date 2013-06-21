@@ -1,48 +1,49 @@
+require 'html/tag'
 module HTML
-  class Tag
-    def self.generate(tag, params, offset=0)
-      unless params.nil? || params[tag.to_sym].nil?
-        html = "<#{tag}"
-        params[tag.to_sym].each do |k,v|
-          next if v.class == Hash
-          if v.class == Array
-            ## (mod #{v.count})
-            adjusted_offset = offset % v.count
-            html+= " #{k}='#{v[adjusted_offset]}'"
-          else
-            html+= " #{k}='#{v}'"
-          end
+
+  def self.table(objects, params)
+    table = Tag.generate("table", params)
+    table += table_head(objects[0].keys, params)
+    table += table_body(objects, params)    
+    table += Tag.generate_end("table")
+    #try to format the table
+    begin
+      format_html(table)
+    rescue Exception 
+      table
+    end
+  end
+
+  def self.table_head(keys, params)
+    thead = Tag.generate("thead", params)
+    thead += Tag.generate("tr", params)
+    keys.each do |key|
+      thead += Tag.generate("th", params[:thead])
+      thead += key.to_s
+      thead += Tag.generate_end("th")
+    end
+    thead += Tag.generate_end("tr")
+    thead += Tag.generate_end("thead")
+    return thead
+  end
+  
+  def self.table_body(rows, params)
+    tbody = Tag.generate("tbody", params)
+    tr_offset = 0
+    rows.each do |row|
+      tbody += Tag.generate("tr", params[:tbody], tr_offset)
+        td_offset = 0
+        row.each do |k,v|
+          tbody += Tag.generate("td", params[:tbody], td_offset)
+          tbody += v
+          tbody += Tag.generate_end("td")
+          td_offset += 1
         end
-        html+=">"
-      else 
-        "<#{tag}>"
-      end
+      tbody += Tag.generate_end("tr")
+      tr_offset += 1
     end
-    def self.table_head(keys, params)
-      thead = generate("thead", params)
-      thead += generate("tr", params[:thead])
-      keys.each do |key|
-        thead += "#{generate("th", params[:thead])}#{key}</th>"
-      end
-      thead += "</tr></thead>"
-      return thead
-    end
-    def self.table_body(rows, params)
-      tbody = generate("tbody", params)
-      tr_i = 0
-      rows.each do |row|
-        tbody += generate("tr", params[:tbody], tr_i)
-          td_i = 0
-          row.each do |k,v|
-            tbody += "#{generate("td", params[:tbody], td_i)}#{v}</td>"
-            td_i += 1
-          end
-        tbody +="</tr>"
-        tr_i += 1
-      end
-      tbody +="</tbody>"
-      return tbody
-    end
+    tbody += Tag.generate_end("tbody")
+    return tbody
   end
   def self.format_html(html)
   #Finds html tags via regex and adds whitespace so
@@ -59,4 +60,5 @@ module HTML
     end
     return html
   end
+
 end
