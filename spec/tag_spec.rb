@@ -16,8 +16,10 @@ describe HTML::Tag do
     @params = {:table => {:border => 1, :class => 'fluid'}, :tbody => {:class => 'foo', :tr => {:class => 'meow'}}}
   end
   it "should generate tag" do
-    tag = HTML::Tag.generate("tr", @params[:tbody])
+    tag = HTML::Tag.new("tr").assign_parameters(@params[:tbody])
     tag.should == "<tr class='meow'>"
   end
+
+  it "should iterate through an array of ids"
 
 end

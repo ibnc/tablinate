@@ -2,7 +2,7 @@ require 'html/tag'
 module HTML
 
   def self.table(objects, params)
-    table = Tag.generate("table", params)
+    table = Tag.new("table").assign_parameters(params)
     table += table_head(objects[0].keys, params)
     table += table_body(objects, params)    
     table += Tag.generate_end("table")
@@ -15,10 +15,10 @@ module HTML
   end
 
   def self.table_head(keys, params)
-    thead = Tag.generate("thead", params)
-    thead += Tag.generate("tr", params)
+    thead = Tag.new("thead").assign_parameters(params)
+    thead += Tag.new("tr").assign_parameters(params)
     keys.each do |key|
-      thead += Tag.generate("th", params[:thead])
+      thead += Tag.new("th").assign_parameters( params[:thead])
       thead += key.to_s
       thead += Tag.generate_end("th")
     end
@@ -28,13 +28,13 @@ module HTML
   end
   
   def self.table_body(rows, params)
-    tbody = Tag.generate("tbody", params)
+    tbody = Tag.new("tbody").assign_parameters(params)
     tr_offset = 0
     rows.each do |row|
-      tbody += Tag.generate("tr", params[:tbody], tr_offset)
+      tbody += Tag.new("tr").assign_parameters(params[:tbody], tr_offset)
         td_offset = 0
         row.each do |k,v|
-          tbody += Tag.generate("td", params[:tbody], td_offset)
+          tbody += Tag.new("td").assign_parameters(params[:tbody], td_offset)
           tbody += v
           tbody += Tag.generate_end("td")
           td_offset += 1
