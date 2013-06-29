@@ -17,7 +17,31 @@ describe HTML::Tag do
   end
   it "should generate tag" do
     tag = HTML::Tag.new("tr").assign_parameters(@params[:tbody])
-    tag.should == "<tr class='meow'>"
+    tag.html.should == "<tr class='meow'>"
+  end
+
+  it "should append the appropriate end tag" do
+    tag = HTML::Tag.new("tbody").assign_parameters(@params)
+    tag.append_end_tag
+    tag.html.include?("</tbody>").should == true
+  end
+
+  it "should append a subtag" do 
+    tag = HTML::Tag.new("tbody").assign_parameters(@params)
+    sub_tag = HTML::Tag.new("tr").assign_parameters(@params[:tbody])
+    sub_tag.append_end_tag
+    tag.append_sub_tag(sub_tag)
+    tag.append_end_tag
+    tag.should == "<tbody class='foo'><tr class='meow'></tr></tbody>"
+  end
+
+  it "should append a subtag when the supertag has its end tag" do
+    tag = HTML::Tag.new("tbody").assign_parameters(@params)
+    tag.append_end_tag
+    sub_tag = HTML::Tag.new("tr").assign_parameters(@params[:tbody])
+    sub_tag.append_end_tag
+    tag.append_sub_tag(sub_tag)
+    tag.should == "<tbody class='foo'><tr class='meow'></tr></tbody>"
   end
 
   it "should iterate through an array of ids"

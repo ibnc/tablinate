@@ -7,25 +7,10 @@ module HTML
       self.tag_name = tag_name
       self.html = "<#{tag_name}>"
     end
-    
-    def self.hassign_parameters(params, offset=0)
-      html = ""
-      if params then
-        params.each do |param, value|
-          next if value.class == Hash
-          if value.class == Array then
-            html += " #{param}='#{value[ offset % value.count ]}" 
-          else
-            html += " #{param}='#{value}'"
-          end
-        end
-      end
-      return html
-    end
 
     def assign_parameters(params, offset=0)
-      self.html = self.html.chop
       if params && params[self.tag_name.to_sym] then
+        self.html = self.html.chop
         params[self.tag_name.to_sym].each do |param, value|
           next if value.class == Hash
           if value.class == Array then
@@ -34,15 +19,29 @@ module HTML
             self.html += " #{param}='#{value}'"
           end
         end
-        
+        self.html += ">"
       end
-      self.html += ">"
+      return self
     end
 
-    def self.generate_end(tag)
-      "</#{tag}>"
+    def append_end_tag
+      self.html += "</#{self.tag_name}>"
     end
 
+    def to_s
+      return self.html
+    end
+
+    def append_sub_tag(tag_object)
+      if self.html.include?("</#{self.tag_name}>") then
+        self.html = self.html.gsub(/\<\/#{self.tag_name}\>/, '')
+        self.html += tag_object.html
+        append_end_tag()
+      else
+        self.html += tag_object.html
+      end
+      self.html
+    end
 
   end
 end
