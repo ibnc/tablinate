@@ -1,5 +1,5 @@
 require 'rspec'
-require File.dirname(__FILE__)+"/../lib/html.rb"
+require File.dirname(__FILE__)+'/../lib/tablinate.rb'
 
 describe HTML do
   before :each do 
@@ -16,11 +16,11 @@ describe HTML do
 
   it "should generate table header" do
     thead = HTML.table_head(@employees[0].keys, @params)
-    thead.should == "<thead><tr><th>id</th><th>first_name</th><th>last_name</th><th>title</th></tr></thead>"
+    thead.tag_content.should == "<thead><tr><th>id</th><th>first_name</th><th>last_name</th><th>title</th></tr></thead>"
   end
   it "should generate table body" do
     tbody = HTML.table_body(@employees, @params)
-    tbody.should == @body
+    tbody.tag_content.should == @body
   end
   it "should format the html output" do
     #output = HTML.format_html()

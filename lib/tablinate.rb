@@ -7,9 +7,18 @@ module Tablinate
 
   def self.generate_table(objects, params={})
     #turns an ActiveRecord::Relation into an array of hashes.
-    objects = JSON.parse(objects) if objects.class == String
-    objects = objects.collect{ |x| x.attributes } unless objects.class == Array
-    table = HTML.table(objects, params)
+    objects = self.parse_objects(objects)
+    HTML.table(objects, params)
+  end
+
+  def self.parse_objects(objects)
+    if objects.class == String then
+      return JSON.parse(objects)
+    elsif objects.class == Array
+      return objects
+    else
+     return objects.collect{ |x| x.attributes }
+    end
   end
 
 end

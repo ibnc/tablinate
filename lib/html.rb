@@ -2,14 +2,14 @@ module HTML
 
   def self.table(objects, params)
     table = Tag.new("table").assign_parameters(params)
-    table.html += table_head(objects[0].keys, params)
-    table.html += table_body(objects, params)    
+    table.append_sub_tag(table_head(objects[0].keys, params))
+    table.append_sub_tag(table_body(objects, params))
     table.append_end_tag 
     #try to format the table
     begin
       format_html(table)
     rescue Exception 
-      table.html
+      table.tag_content
     end
   end
 
@@ -18,14 +18,14 @@ module HTML
     tr = Tag.new("tr").assign_parameters(params)
     keys.each do |key|
       th = Tag.new("th").assign_parameters( params[:thead])
-      th.html += key.to_s
+      th.append_value(key.to_s)
       th.append_end_tag
-      tr.html += th.html
+      tr.append_sub_tag(th)
     end
     tr.append_end_tag
-    thead.html += tr.html
+    thead.append_sub_tag(tr)
     thead.append_end_tag
-    return thead.html
+    return thead
   end
   
   def self.table_body(rows, params)
@@ -36,18 +36,19 @@ module HTML
         td_offset = 0
         row.each do |k,v|
           td = Tag.new("td").assign_parameters(params[:tbody], td_offset)
-          td.html += v
+          td.append_value(v)
           td.append_end_tag 
           td_offset += 1
-          tr.html += td.html
+          tr.append_sub_tag(td)
         end
       tr.append_end_tag
       tr_offset += 1
-      tbody.html += tr.html
+      tbody.append_sub_tag(tr)
     end
     tbody.append_end_tag
-    return tbody.html
+    return tbody
   end
+
   def self.format_html(html)
   #Finds html tags via regex and adds whitespace so
   #that the table doesn't look disgusting in the 
@@ -55,7 +56,7 @@ module HTML
     html.split('')
     tags = html.scan(%r{</?[^>]+?>}).uniq
     tags.each do |tag|
-      if tag.length > 5 || tag.include?("/") || tag.include?("tr>")
+      if tag.length > 5 || tag.include?("/") || tag.include?("tr>") then
         html = html.gsub(tag,"#{tag}\n") 
       else
         html = html.gsub(tag,"\s\s#{tag}")

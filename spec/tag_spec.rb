@@ -1,6 +1,5 @@
 require 'rspec'
-require File.dirname(__FILE__)+"/../lib/html.rb"
-require File.dirname(__FILE__)+"/../lib/html/tag.rb"
+require File.dirname(__FILE__)+"/../lib/tablinate.rb"
 
 describe HTML::Tag do
 
@@ -17,13 +16,13 @@ describe HTML::Tag do
   end
   it "should generate tag" do
     tag = HTML::Tag.new("tr").assign_parameters(@params[:tbody])
-    tag.html.should == "<tr class='meow'>"
+    tag.tag_content.should == "<tr class='meow'>"
   end
 
   it "should append the appropriate end tag" do
     tag = HTML::Tag.new("tbody").assign_parameters(@params)
     tag.append_end_tag
-    tag.html.include?("</tbody>").should == true
+    tag.tag_content.include?("</tbody>").should == true
   end
 
   it "should append a subtag" do 
@@ -32,17 +31,10 @@ describe HTML::Tag do
     sub_tag.append_end_tag
     tag.append_sub_tag(sub_tag)
     tag.append_end_tag
-    tag.should == "<tbody class='foo'><tr class='meow'></tr></tbody>"
+    tag.tag_content.should == "<tbody class='foo'><tr class='meow'></tr></tbody>"
   end
 
-  it "should append a subtag when the supertag has its end tag" do
-    tag = HTML::Tag.new("tbody").assign_parameters(@params)
-    tag.append_end_tag
-    sub_tag = HTML::Tag.new("tr").assign_parameters(@params[:tbody])
-    sub_tag.append_end_tag
-    tag.append_sub_tag(sub_tag)
-    tag.should == "<tbody class='foo'><tr class='meow'></tr></tbody>"
-  end
+  it "should append a subtag when the supertag has its end tag"
 
   it "should iterate through an array of ids"
 
