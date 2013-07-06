@@ -1,4 +1,5 @@
 require 'rspec'
+require 'nokogiri'
 require File.dirname(__FILE__)+'/../lib/tablinate.rb'
 
 describe Tablinate do
@@ -10,12 +11,15 @@ describe Tablinate do
         :td => { :class => 'rawr', :id => [1,2,3], :foo => :bar }
       }
     }
-    table = [
+    objects = [
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
     ]
-    Tablinate.generate_table(table, table_params)
+    table =  Tablinate.generate_table(objects, table_params)
+    #using nokogiri to ensure the markup is correct
+    doc = Nokogiri::XML(table.to_s)
+    doc.errors.should == []
   end
 end

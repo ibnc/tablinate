@@ -3,12 +3,12 @@ require File.dirname(__FILE__)+'/html.rb'
 require File.dirname(__FILE__)+'/html/tag.rb'
 ## Thoughts:
 # Support column summing?
+#TODO: Throw meaningful errors
 module Tablinate
 
+  #turns an ActiveRecord::Relation into an array of hashes.
   def self.generate_table(objects, params={})
-    #turns an ActiveRecord::Relation into an array of hashes.
-    objects = self.parse_objects(objects)
-    HTML.table(objects, params)
+    HTML.table(self.parse_objects(objects), params)
   end
 
   def self.parse_objects(objects)
