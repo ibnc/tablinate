@@ -1,6 +1,6 @@
 require 'json'
-require 'html'
-require 'html/tag'
+require File.dirname(__FILE__)+'/html.rb'
+require File.dirname(__FILE__)+'/html/tag.rb'
 ## Thoughts:
 # Support column summing?
 module Tablinate
