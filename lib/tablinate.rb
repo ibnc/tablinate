@@ -22,3 +22,7 @@ module Tablinate
   end
 
 end
+
+if defined?(Rails::Railtie)
+  require 'tablinate/railtie'
+end
