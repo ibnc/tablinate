@@ -7,3 +7,4 @@ module Tablinate
     end
   end
 end 
+

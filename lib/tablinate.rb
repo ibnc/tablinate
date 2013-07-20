@@ -1,8 +1,10 @@
 require 'json'
 require 'html'
 require 'html/tag'
+require 'tablinate/array'
 ## Thoughts:
 # Support column summing?
+# TODO: Support hidden columns?
 module Tablinate
 
   def self.generate_table(objects, params={})
@@ -15,10 +17,11 @@ module Tablinate
     if objects.class == String then
       return JSON.parse(objects)
     elsif objects.class == Array
-      return objects
-    else
-     return objects.collect{ |x| x.attributes }
+      unless objects[0].class == Hash then
+        return objects.collect{ |x| x.attributes }
+      end
     end
+    return objects
   end
 
 end
