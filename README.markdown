@@ -36,7 +36,7 @@ Tablinate is a ruby gem that takes arrays of hashes, ActiveRecord::Relation obje
 ### 2) views/index.haml
 
     %body
-      =Tablinate.generate_table(@employees)
+      = @employees.tablinate()
 
 ### 3) view-source:http://localhost:4567/
 
@@ -91,7 +91,7 @@ Because it uses normal html markup, tablinated tables are easily styled using CS
 ### views/index.haml
 
     %body
-      =Tablinate.generate_table(@employees, { :table => { :border => 1, :class => 'fluid' }, :tbody => { :class => 'foo' } } )
+      =@employees.tablinate( { :table => { :border => 1, :class => 'fluid' }, :tbody => { :class => 'foo' } } )
 
 ### view-source:http://localhost:4567/
 
@@ -128,7 +128,7 @@ Options are highly expandable, and support many useful notations. For example:
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
     ]
     
-    Tablinate.generate_table(@table, @table_params)
+    @table.tablinate(@table_params)
     
     <table class='table'>
     <thead>
@@ -166,4 +166,4 @@ Options are highly expandable, and support many useful notations. For example:
 When using haml, you may need to unescape html tags by: 
 
     %body
-      != Tablinate.generate_table(...
+      != [ { ... }, ... ].tablinate(...)
