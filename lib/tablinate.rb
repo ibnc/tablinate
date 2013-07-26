@@ -6,24 +6,21 @@ require 'tablinate/array'
 # Support column summing?
 # TODO: Support hidden columns?
 module Tablinate
-
+  #turns an ActiveRecord::Relation into an array of hashes.
   def self.generate_table(objects, params={})
-    #turns an ActiveRecord::Relation into an array of hashes.
-    objects = self.parse_objects(objects)
-    HTML.table(objects, params)
+    HTML.table(self.parse_objects(objects), params)
   end
 
-  def self.parse_objects(objects)
-    if objects.class == String then
-      return JSON.parse(objects)
-    elsif objects.class == Array
-      unless objects[0].class == Hash then
-        return objects.collect{ |x| x.attributes }
+  private 
+    def self.parse_objects(objects)
+      if objects.class == String then
+        return JSON.parse(objects)
+      elsif objects.class.to_s == "ActiveRecord::Relation"
+          return objects.collect{ |x| x.attributes }
+      else
+        return objects
       end
     end
-    return objects
-  end
-
 end
 
 if defined?(Rails::Railtie)
