@@ -1,13 +1,12 @@
-require 'active_record'
-
 module Tablinate
-  class ActiveRecord::Relation
+  module ActiveRecord
+    module Tablination
       def tablinate(params={})
         rel = to_a()
         Tablinate.generate_table(rel, params)
       end
-  end
-    #::ActiveRecord::Base.extend Tablination
-    #::ActiveRecord::Relation.extend Tablination
-end
+    end
 
+    ::ActiveRecord::Relation.extend Tablination
+  end
+end
