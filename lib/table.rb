@@ -14,9 +14,9 @@ class Table
     table.build_structure()
     #try to format the table
     begin
-      format_html(@table)
+      format_html(table.table)
     rescue Exception 
-      @table
+      table.table
     end
   end
 
