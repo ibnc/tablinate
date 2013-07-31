@@ -10,7 +10,7 @@ module Head
     tr = Tag.new("tr").assign_parameters(params)
     columns.each do |column|
       th = Tag.new("th").assign_parameters(params)
-      th.value = column[1].to_s
+      th.value = column.to_s
       th.append_end_tag
       tr << th
     end

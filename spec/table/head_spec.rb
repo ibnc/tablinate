@@ -9,7 +9,12 @@ describe "table", Head do
 
   context "given params" do
     it "should construct the table head" do
-      subject.build_head(objects[0], params).class.should == Tag
+      thead = subject.build_head(objects[0].keys, params)
+      thead.class.should == Tag
+      thead.tag_content.scan(/<[a-zA-Z ]+=\'.*+/).each do |tag|
+        tag_name = tag.scan(/[a-zA-Z]+/)
+        Tag.new(tag_name).tag_name.should == tag_name
+      end
     end
 
     it "should construct the table head rows" do
