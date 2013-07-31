@@ -1,25 +1,6 @@
 require 'spec_helper'
 
 describe Tablinate do
-  let(:objects) do
-    [
-      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
-      { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
-    ]
-  end
-
-  let(:params) do 
-     { 
-      :table => { :class => "eek", :id => 'rawr' },
-      :tbody => {
-        :tr => { :class => [ 'class1', 'class2', 'class3' ], :id => 'id-2' },
-        :td => { :class => 'rawr', :id => [1,2,3], :foo => :bar }
-      }
-    }
-  end
-
   subject { Tablinate }
 
   context "given an array of hashes" do

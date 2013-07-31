@@ -1,6 +1,8 @@
 require 'json'
-require 'html'
-require 'html/tag'
+require 'tag'
+require 'table/head'
+require 'table/body'
+require 'table'
 require 'tablinate/array'
 ## Thoughts:
 # Support column summing?
@@ -8,7 +10,7 @@ require 'tablinate/array'
 module Tablinate
   #turns an ActiveRecord::Relation into an array of hashes.
   def self.generate_table(objects, params={})
-    HTML.table(self.parse_objects(objects), params)
+    Table.build(self.parse_objects(objects), params)
   end
 
   private 
