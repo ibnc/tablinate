@@ -1,8 +1,8 @@
 require 'json'
-require 'tag'
-require 'table/head'
-require 'table/body'
-require 'table'
+require 'tablinate/tag'
+require 'tablinate/table/head'
+require 'tablinate/table/body'
+require 'tablinate/table'
 require 'tablinate/array'
 ## Thoughts:
 # Support column summing?
