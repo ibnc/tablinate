@@ -11,24 +11,39 @@ describe "table", Head do
     it "should construct the table head" do
       thead = subject.build_head(objects[0].keys, params)
       thead.class.should == Tag
-      thead.tag_content.scan(/<[a-zA-Z ]+=\'.*+/).each do |tag|
-        tag_name = tag.scan(/[a-zA-Z]+/)
-        Tag.new(tag_name).tag_name.should == tag_name
+      thead.tag_content.scan(/<([a-zA-Z]+) ([a-zA-Z]+=\'.*?\'+)>/).each do |tag|
+        tag_name = tag[0]
+        next if tag_name == "thead"
+        params[:thead][tag_name.to_sym].each do |param, value|
+          if value.class == Array then
+            value.map do |v| 
+              tag[1].include?("#{param.to_s}=\'#{v}\'")
+            end.include?(true).should be_true
+          else
+            tag[1].include?("#{param.to_s}=\'#{value}\'").should == true
+          end
+        end
       end
     end
 
     it "should construct the table head rows" do
-      subject.build_head_rows(objects[0], params[:thead]).class.should == Tag
+      head_rows = subject.build_head_rows(objects[0], params[:thead])
+      head_rows.class.should == Tag
+      head_rows.tag_name.should == "tr"
     end
   end
   
   context "without params" do
     it "should construct the table head" do
-      subject.build_head(objects[0]).class.should == Tag
+      head = subject.build_head(objects[0])
+      head.class.should == Tag
+      head.tag_name.should == "thead"
     end
 
     it "should construct the table head rows" do
-      subject.build_head_rows(objects[0]).class.should == Tag
+      head_rows = subject.build_head_rows(objects[0])
+      head_rows.class.should == Tag
+      head_rows.tag_name.should == "tr"
     end
   end
 end
