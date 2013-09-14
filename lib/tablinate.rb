@@ -3,7 +3,7 @@ require 'tablinate/tag'
 require 'tablinate/table/head'
 require 'tablinate/table/body'
 require 'tablinate/table'
-require 'tablinate/array'
+require 'tablinate/adapters/array'
 ## Thoughts:
 # Support column summing?
 # TODO: Support hidden columns?
