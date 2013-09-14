@@ -1,7 +1,7 @@
 require 'rails/railtie'
 require 'active_record'
 require 'spec_helper'
-require File.dirname(__FILE__)+"/../../lib/tablinate/active_record"
+require File.dirname(__FILE__)+"/../../lib/tablinate/adapters/active_record"
 describe "An instance of", ActiveRecord::Relation do
   #subject { need to stub out ActiveRecord::Relation somehow }
   describe "#tablinate" do
