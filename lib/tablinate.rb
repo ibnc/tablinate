@@ -10,7 +10,7 @@ require 'tablinate/adapters/array'
 module Tablinate
   #turns an ActiveRecord::Relation into an array of hashes.
   def self.generate_table(objects, params={})
-    Table.build(self.parse_objects(objects), params)
+    Table.new(self.parse_objects(objects), params)
   end
 
   private 

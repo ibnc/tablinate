@@ -12,7 +12,10 @@ class Tag
   def to_s
     build_open_tag + text + add_sub_tags + build_close_tag
   end
-  alias_method :to_html, :to_s
+
+  def to_html
+    format_html(to_s)
+  end
 
   private
     def build_close_tag
@@ -20,7 +23,7 @@ class Tag
     end
 
     def add_sub_tags
-      children.map {|tag| tag.to_html }.join(" ")
+      children.map {|tag| tag.to_s }.join(" ")
     end
 
     def build_open_tag
@@ -33,8 +36,23 @@ class Tag
         when String
           " #{key}='#{value}'"
         when Array
-        " #{key}='#{value.join(" ")}'"
+          " #{key}='#{value.join(" ")}'"
         end
       end.join(" ")
+    end
+
+    def format_html(html)
+    #Finds html tags via regex and adds whitespace so
+    #that the table doesn't look disgusting in the 
+    #source code.
+      tags = html.scan(%r{</?[^>]+?>}).uniq
+      tags.each do |tag|
+        if tag.length > 5 || tag.include?("/") || tag.include?("tr>") then
+          html.gsub!(tag,"#{tag}\n") 
+        else
+          html.gsub!(tag,"\s\s#{tag}")
+        end
+      end
+      return html
     end
 end
