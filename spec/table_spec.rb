@@ -1,35 +1,11 @@
 require 'spec_helper'
 
 describe "An instance of", Table do
-  subject { Table.new }
-  it { should respond_to :build_head }
-  it { should respond_to :build_body }
+  let(:values) { [{foo: "bar", bar: "baz"}] }
+  subject { Table.new(values, {}) }
 
-  it "should initialize an empty table tag" do
-    Tag.should_receive(:new).with("table", "", {}) { Tag }
-    subject
-  end
-
-  # it "should build the table structure" do
-  #   subject.instance_variable_set(:@table, Tag.new("table"))
-  #   Array.any_instance.should_receive(:<<).exactly(2)
-  #   subject.build_structure()
-  # end
-
-  context "given params" do
-    it "should build the table elements" do
-      subject.should_receive(:build_head) 
-      subject.should_receive(:build_body) 
-      subject.build_elements(objects, params)
-    end
-  end
-
-  context "without params" do
-    it "should build the table elements" do
-      subject.should_receive(:build_head) 
-      subject.should_receive(:build_body) 
-      subject.build_elements(objects)
-    end
+  it "should build the table with children elements" do
+    subject.to_s.should eq "<table><thead><tr><th>foo</th> <th>bar</th></tr></thead> <tbody><tr><td>bar</td> <td>baz</td></tr></tbody></table>"
   end
 end
 

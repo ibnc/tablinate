@@ -37,4 +37,11 @@ describe Tag do
       end
     end
   end
+
+  describe ".html" do
+    it "should return tag and sub tags as formatted string" do
+      subject.children << Tag.new("thead") 
+      subject.to_html.should eq "<table>\n<thead>\n</thead>\n</table>\n"
+    end
+  end
 end
