@@ -5,12 +5,14 @@ class Table
   attr_accessor :table
 
   def initialize(params={})
-    @table = Tag.new("table").assign_parameters(params)
+    @table = Tag.new("table", "", params)
   end
 
   def self.build(values, params={})
-    table = self.new(params[:table])
-    table.build_elements(values, params)
+    thead_params = params ? params.delete(:thead) : {}
+    tbody_params = params ? params.delete(:tbody) : {}
+    table = self.new(params)
+    table.build_elements(values, tbody_params, thead_params)
     table.build_structure()
     #try to format the table
     begin
@@ -20,15 +22,14 @@ class Table
     end
   end
 
-  def build_elements(table_values, params={})
-    @thead = build_head(table_values[0].keys, params)
-    @tbody = build_body(table_values, params)
+  def build_elements(table_values, tbody_params={}, thead_params={})
+    @thead = build_head(table_values[0].keys, thead_params)
+    @tbody = build_body(table_values, tbody_params)
   end
 
   def build_structure
-    @table << @thead
-    @table << @tbody
-    @table.append_end_tag
+    @table.children << @thead
+    @table.children << @tbody
   end
   
   def self.format_html(html)
