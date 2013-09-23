@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 class DummyClass
-  extend Body
+  extend Tbody
 end
 
-describe "table", Body do
+describe "table", Tbody do
   subject { DummyClass }
 
   context "given params" do

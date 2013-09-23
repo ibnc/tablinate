@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 class DummyClass
-  extend Head
+  extend Thead
 end
 
-describe "table", Head do
+describe "table", Thead do
   subject { DummyClass }
 
   context "given params" do
