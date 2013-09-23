@@ -1,4 +1,4 @@
-module Head
+module Thead
   def build_head(columns, params={})
     tr_params = params ? params.delete(:tr) : {}
     thead = Tag.new("thead", "", params)

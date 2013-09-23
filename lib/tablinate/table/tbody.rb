@@ -1,4 +1,4 @@
-module Body
+module Tbody
   def build_body(values, params={})
     tr_params = params ? params.delete(:tr) : {}
     tbody = Tag.new("tbody", "", params)

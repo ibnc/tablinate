@@ -1,7 +1,7 @@
 require 'json'
 require 'tablinate/tag'
-require 'tablinate/table/head'
-require 'tablinate/table/body'
+require 'tablinate/table/thead'
+require 'tablinate/table/tbody'
 require 'tablinate/table'
 require 'tablinate/adapters/array'
 ## Thoughts:

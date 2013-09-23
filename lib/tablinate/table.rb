@@ -1,6 +1,6 @@
 class Table < Tag
-  include Head
-  include Body
+  include Thead
+  include Tbody
   
   def initialize(values, params={})
     thead = build_head(values[0].keys, thead_params(params))
