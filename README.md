@@ -4,7 +4,7 @@
 
 ## Author(s)
 
-* [Isabelle Carter](http://github.com/unholydh)
+* [Isabelle Carter](http://github.com/ibnc)
 * [Kevin Collette](http://github.com/collettiquette)
 
 ## Description
