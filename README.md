@@ -4,7 +4,7 @@
 
 ## Author(s)
 
-* [Kyle Carter](http://github.com/unholydh)
+* [Isabelle Carter](http://github.com/unholydh)
 * [Kevin Collette](http://github.com/collettiquette)
 
 ## Description
