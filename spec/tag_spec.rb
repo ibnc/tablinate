@@ -31,9 +31,20 @@ describe Tag do
     end
 
     context "when an attribute's value is an array" do
-      it "should insert all values" do
-        subject.attributes = { foo: ["bar", "baz"] } 
-        subject.to_s.should eq "<table foo='bar baz'></table>"
+      subject { Tag.new("tr") }
+      let(:attributes) { { foo: ["bar", "barz"] } }
+
+      it "should iteratively assign the corresponding value" do
+        tbody = Tag.new("tbody")
+        attributes[:foo].length.times do 
+          tr = subject
+          tr.attributes = attributes
+          tbody.children << tr
+        end
+
+        attributes[:foo].each do |value|
+          tbody.to_s.include?("<tr foo='#{value}'>").should be_true
+        end
       end
     end
   end
@@ -45,3 +56,4 @@ describe Tag do
     end
   end
 end
+

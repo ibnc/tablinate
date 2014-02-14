@@ -8,17 +8,19 @@ describe "table", Tbody do
   subject { DummyClass }
 
   context "given params" do
+    #TODO rewrite this test it sucks
     it "should construct the table body" do
       body = subject.build_body(objects, params[:tbody])
       body.class.should == Tag
       body.to_html.scan(/<([a-zA-Z]+) ([a-zA-Z]+=\'.*?\'+)>/).each do |tag|
         name = tag[0]
         next if name == "tbody"
-        params[:tbody][name.to_sym].each do |param, value|
+        params[:tbody][name.to_sym].each_with_index do |(param, value), i|
+          next if param == :td
           if value.class == Array then
-            tag[1].include?("#{param.to_s}=\'#{value.join(" ")}\'").should be_true
+            tag[1].should include("#{param.to_s}='#{value[i]}'")
           else
-            tag[1].include?("#{param.to_s}=\'#{value}\'").should == true
+            tag[1].should include("#{param.to_s}='#{value}'")
           end
         end
       end

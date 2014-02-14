@@ -27,7 +27,7 @@ class Tag
     end
 
     def build_open_tag
-    "<#{name}" + attributes_to_html + ">"
+      "<#{name}" + attributes_to_html + ">"
     end
 
     def attributes_to_html
@@ -36,15 +36,15 @@ class Tag
         when String
           " #{key}='#{value}'"
         when Array
-          " #{key}='#{value.join(" ")}'"
+          " #{key}='#{value.shift()}'"
         end
       end.join(" ")
     end
 
     def format_html(html)
-    #Finds html tags via regex and adds whitespace so
-    #that the table doesn't look disgusting in the 
-    #source code.
+      #Finds html tags via regex and adds whitespace so
+      #that the table doesn't look disgusting in the 
+      #source code.
       tags = html.scan(%r{</?[^>]+?>}).uniq
       tags.each do |tag|
         if tag.length > 5 || tag.include?("/") || tag.include?("tr>") then
