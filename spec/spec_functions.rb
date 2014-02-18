@@ -24,7 +24,3 @@ def params
     }
   }
 end
-
-
-"<tbody><tr class='class1'  id='id-2'><td>value1</td> <td>value2</td> <td>value3</td></tr> <tr class='class2'  id='id-2'><td>value1</td> <td>value2</td> <td>value3</td></tr> <tr class='class3'  id='id-2'><td>value1</td> <td>value2</td> <td>value3</td></tr> <tr class=''  id='id-2'><td>value1</td> <td>value2</td> <td>value3</td></tr></tbody>"
-"class=''  id='id-2'"
