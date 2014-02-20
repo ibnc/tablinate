@@ -1,24 +1,22 @@
 require 'spec_helper'
 
 class DummyClass
-  extend Body
+  extend Tbody
 end
 
-describe "table", Body do
+describe "table", Tbody do
   subject { DummyClass }
 
   context "given params" do
     it "should construct the table body" do
       body = subject.build_body(objects, params[:tbody])
       body.class.should == Tag
-      body.tag_content.scan(/<([a-zA-Z]+) ([a-zA-Z]+=\'.*?\'+)>/).each do |tag|
-        tag_name = tag[0]
-        next if tag_name == "tbody"
-        params[:tbody][tag_name.to_sym].each do |param, value|
+      body.to_html.scan(/<([a-zA-Z]+) ([a-zA-Z]+=\'.*?\'+)>/).each do |tag|
+        name = tag[0]
+        next if name == "tbody"
+        params[:tbody][name.to_sym].each do |param, value|
           if value.class == Array then
-            value.map do |v| 
-              tag[1].include?("#{param.to_s}=\'#{v}\'")
-            end.include?(true).should be_true
+            tag[1].include?("#{param.to_s}=\'#{value.join(" ")}\'").should be_true
           else
             tag[1].include?("#{param.to_s}=\'#{value}\'").should == true
           end
