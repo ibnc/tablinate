@@ -1,6 +1,4 @@
-# tablinate
-
-* Code: [http://github.com/unholydh/tablinate](http://github.com/unholydh/tablinate)
+# Tablinate
 
 ## Author(s)
 
