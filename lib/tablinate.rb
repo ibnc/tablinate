@@ -1,7 +1,7 @@
 require 'json'
 require 'tablinate/tag'
-require 'tablinate/table/head'
-require 'tablinate/table/body'
+require 'tablinate/table/thead'
+require 'tablinate/table/tbody'
 require 'tablinate/table'
 require 'tablinate/adapters/array'
 ## Thoughts:
@@ -10,7 +10,7 @@ require 'tablinate/adapters/array'
 module Tablinate
   #turns an ActiveRecord::Relation into an array of hashes.
   def self.generate_table(objects, params={})
-    Table.build(self.parse_objects(objects), params)
+    Table.new(self.parse_objects(objects), params)
   end
 
   private 

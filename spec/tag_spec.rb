@@ -1,67 +1,59 @@
 require 'spec_helper'
 
-describe "An instance of", Tag do
+describe Tag do
+  subject{ Tag.new("table") }
 
-  describe "#new" do
-    subject { Tag }
-
-    it "should init an empty tag" do
-      subject.new("name").tag_content.should == "<name>"
+  describe ".new" do
+    it "should assign all instance variables" do
+      subject.instance_variable_get(:@name).should eq :table
+      subject.instance_variable_get(:@attributes).should eq Hash.new
+      subject.instance_variable_get(:@children).should eq Array.new
+      subject.instance_variable_get(:@text).should eq ""
     end
-  end 
+  end
 
-  describe "#<<" do
-    subject { Tag.new("table") }
-    
-    context "given an array" do
-      it "should pass each element to self" do
-        array = [ 1,2,2,4 ]
-        subject << array
-        subject.to_s.include?(array.join).should == true
+  describe ".to_s" do
+    it "should return tag and sub tags as string" do
+      subject.children << Tag.new("thead") 
+      subject.to_s.should eq "<table><thead></thead></table>"
+    end
+
+    it "should insert text in between open and close tags." do
+      subject.text = "testing"
+      subject.to_s.should eq "<table>testing</table>"
+    end
+
+    context "when an attribute's value is a string" do
+      it "should insert attributes in opening tag" do
+        subject.attributes = { foo: "bar" } 
+        subject.to_s.should eq "<table foo='bar'></table>"
       end
     end
 
-    context "given a string" do
-      it "should append the string" do
-        subject << "string"
-        subject.to_s.include?("string").should == true
-      end
-    end
+    context "when an attribute's value is an array" do
+      subject { Tag.new("tr") }
+      let(:attributes) { { foo: ["bar", "barz"] } }
 
-    context "given a Tag" do
-      it "should append as a sub_tag" do
-        sub_tag = Tag.new("tbody")
-        subject << sub_tag
-        subject.to_s.include?(sub_tag.tag_name).should == true
+      it "should iteratively assign the corresponding value" do
+        tbody = Tag.new("tbody")
+        attributes[:foo].length.times do 
+          tr = subject
+          tr.attributes = attributes
+          tbody.children << tr
+        end
+
+        attributes[:foo].each do |value|
+          tbody.to_s.include?("<tr foo='#{value}'>").should be_true
+        end
       end
     end
   end
 
-  describe "#assign_parameters" do
-    subject { Tag.new("tr") }
-
-    context "given params" do
-      it "should append the html params" do
-        tag = subject.assign_parameters(params[:tbody])
-        params[:tbody][:tr].keys.map do |key|
-          tag.tag_content.include?("#{key.to_s}=").should == true
-        end
-      end
-      
-      it "should iterate through an array of ids" do 
-        offset = 0
-        params[:tbody][:tr][:class].each do |klass|
-          tag = subject.assign_parameters(params[:tbody], offset)
-          tag.tag_content.include?("class='#{klass}'").should == true
-          offset += 1
-        end
-      end
-    end
-    
-    context "without params" do
-      it "should do nothing" do
-        subject.assign_parameters.should == subject
-      end
+  describe ".html" do
+    it "should return tag and sub tags as formatted string" do
+      subject.children << Tag.new("thead") 
+      subject.to_html.should eq "<table>\n<thead>\n</thead>\n</table>\n"
     end
   end
 end
+

@@ -1,20 +1,20 @@
 require 'spec_helper'
 
 class DummyClass
-  extend Head
+  extend Thead
 end
 
-describe "table", Head do
+describe "table", Thead do
   subject { DummyClass }
 
   context "given params" do
     it "should construct the table head" do
       thead = subject.build_head(objects[0].keys, params)
       thead.class.should == Tag
-      thead.tag_content.scan(/<([a-zA-Z]+) ([a-zA-Z]+=\'.*?\'+)>/).each do |tag|
-        tag_name = tag[0]
-        next if tag_name == "thead"
-        params[:thead][tag_name.to_sym].each do |param, value|
+      thead.to_html.scan(/<([a-zA-Z]+) ([a-zA-Z]+=\'.*?\'+)>/).each do |tag|
+        name = tag[0]
+        next if name == "thead"
+        params[:thead][name.to_sym].each do |param, value|
           if value.class == Array then
             value.map do |v| 
               tag[1].include?("#{param.to_s}=\'#{v}\'")
@@ -29,7 +29,7 @@ describe "table", Head do
     it "should construct the table head rows" do
       head_rows = subject.build_head_rows(objects[0], params[:thead])
       head_rows.class.should == Tag
-      head_rows.tag_name.should == "tr"
+      head_rows.name.should == :tr
     end
   end
   
@@ -37,13 +37,13 @@ describe "table", Head do
     it "should construct the table head" do
       head = subject.build_head(objects[0])
       head.class.should == Tag
-      head.tag_name.should == "thead"
+      head.name.should == :thead
     end
 
     it "should construct the table head rows" do
       head_rows = subject.build_head_rows(objects[0])
       head_rows.class.should == Tag
-      head_rows.tag_name.should == "tr"
+      head_rows.name.should == :tr
     end
   end
 end

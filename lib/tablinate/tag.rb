@@ -1,59 +1,61 @@
 class Tag
-  attr_accessor :tag_content, :tag_name
+  attr_reader :name
+  attr_accessor :children, :text, :attributes
 
-  def initialize(tag_name)
-    self.tag_name = tag_name
-    self.tag_content = "<#{tag_name}>"
+  def initialize(name, text="", attributes={}, children=[])
+    @name = name.to_sym
+    @attributes = attributes || {}
+    @children = children || []
+    @text = text.to_s
   end
 
-  def assign_parameters(params={}, offset=0)
-    if params && params[self.tag_name.to_sym] then
-      self.tag_content = self.tag_content.chop
-      params[self.tag_name.to_sym].each do |param, value|
-        self << prepare_param(param.to_s, value, offset)
+  def to_s(offset=0)
+    build_open_tag(offset) + text + add_sub_tags + build_close_tag
+  end
+
+  def to_html
+    format_html(to_s)
+  end
+
+  private
+    def build_close_tag
+      "</#{name}>"
+    end
+
+    def add_sub_tags
+      children.map.with_index {|tag, i| tag.to_s(i) }.join("")
+    end
+
+    def build_open_tag offset
+      attributes = attributes_to_html(offset)
+      "<#{name}#{attributes.empty? ? '' : ' '}" + attributes + ">"
+    end
+
+    def attributes_to_html(offset)
+      attributes.map do |key,value| 
+        case value
+        when String 
+          "#{key}='#{value}'"
+        when Symbol
+          "#{key}='#{value}'"
+        when Array
+          "#{key}='#{value[offset % value.count]}'"
+        end
+      end.join(" ")
+    end
+
+    def format_html(html)
+      #Finds html tags via regex and adds whitespace so
+      #that the table doesn't look disgusting in the 
+      #source code.
+      tags = html.scan(%r{</?[^>]+?>}).uniq
+      tags.each do |tag|
+        if tag.length > 5 || tag.include?("/") || tag.include?("tr>") then
+          html.gsub!(tag,"#{tag}\n") 
+        else
+          html.gsub!(tag,"\s\s#{tag}")
+        end
       end
-      self.tag_content += ">"
+      return html
     end
-    return self
-  end
-
-  def prepare_param(name, value, offset=0)
-    case value
-    when Array then
-      " #{name}='#{value[ offset % value.count ]}'"
-    when String then
-      " #{name}='#{value}'"
-    else
-      ""
-    end
-  end
-
-  def append_end_tag
-    self.tag_content += "</#{self.tag_name}>"
-  end
-
-  def to_s
-    self.tag_content
-  end
-
-  def append_sub_tag(tag_object)
-    self.tag_content += tag_object.tag_content
-  end
-
-  def << (object)
-    case object
-    when Array then 
-      object.each { |x| self << x }
-    when Tag then
-      append_sub_tag(object)
-    when String then
-      self.tag_content += object
-    when Fixnum then
-      self.tag_content += object.to_s
-    end
-  end
-
-  def value=(value)
-    self.tag_content += value.to_s
-  end
 end
