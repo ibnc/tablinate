@@ -9,8 +9,8 @@ class Tag
     @text = text.to_s
   end
 
-  def to_s
-    build_open_tag + text + add_sub_tags + build_close_tag
+  def to_s(offset=0)
+    build_open_tag(offset) + text + add_sub_tags + build_close_tag
   end
 
   def to_html
@@ -23,28 +23,31 @@ class Tag
     end
 
     def add_sub_tags
-      children.map {|tag| tag.to_s }.join(" ")
+      children.map.with_index {|tag, i| tag.to_s(i) }.join("")
     end
 
-    def build_open_tag
-    "<#{name}" + attributes_to_html + ">"
+    def build_open_tag offset
+      attributes = attributes_to_html(offset)
+      "<#{name}#{attributes.empty? ? '' : ' '}" + attributes + ">"
     end
 
-    def attributes_to_html
+    def attributes_to_html(offset)
       attributes.map do |key,value| 
         case value
-        when String
-          " #{key}='#{value}'"
+        when String 
+          "#{key}='#{value}'"
+        when Symbol
+          "#{key}='#{value}'"
         when Array
-          " #{key}='#{value.join(" ")}'"
+          "#{key}='#{value[offset % value.count]}'"
         end
       end.join(" ")
     end
 
     def format_html(html)
-    #Finds html tags via regex and adds whitespace so
-    #that the table doesn't look disgusting in the 
-    #source code.
+      #Finds html tags via regex and adds whitespace so
+      #that the table doesn't look disgusting in the 
+      #source code.
       tags = html.scan(%r{</?[^>]+?>}).uniq
       tags.each do |tag|
         if tag.length > 5 || tag.include?("/") || tag.include?("tr>") then

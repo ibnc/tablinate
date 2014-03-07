@@ -8,20 +8,11 @@ describe "table", Tbody do
   subject { DummyClass }
 
   context "given params" do
+    #TODO rewrite this test it sucks, but it ensures we keep building it right.
     it "should construct the table body" do
       body = subject.build_body(objects, params[:tbody])
-      body.class.should == Tag
-      body.to_html.scan(/<([a-zA-Z]+) ([a-zA-Z]+=\'.*?\'+)>/).each do |tag|
-        name = tag[0]
-        next if name == "tbody"
-        params[:tbody][name.to_sym].each do |param, value|
-          if value.class == Array then
-            tag[1].include?("#{param.to_s}=\'#{value.join(" ")}\'").should be_true
-          else
-            tag[1].include?("#{param.to_s}=\'#{value}\'").should == true
-          end
-        end
-      end
+      body.to_s.should eq(  
+        "<tbody><tr class='class1' id='id-2'><td class='rawr' id='1' foo='bar'>value1</td><td class='rawr' id='2' foo='bar'>value2</td><td class='rawr' id='3' foo='bar'>value3</td></tr><tr class='class2' id='id-2'><td class='rawr' id='1' foo='bar'>value1</td><td class='rawr' id='2' foo='bar'>value2</td><td class='rawr' id='3' foo='bar'>value3</td></tr><tr class='class3' id='id-2'><td class='rawr' id='1' foo='bar'>value1</td><td class='rawr' id='2' foo='bar'>value2</td><td class='rawr' id='3' foo='bar'>value3</td></tr><tr class='class1' id='id-2'><td class='rawr' id='1' foo='bar'>value1</td><td class='rawr' id='2' foo='bar'>value2</td><td class='rawr' id='3' foo='bar'>value3</td></tr></tbody>")
     end
 
     it "should construct the table rows" do
