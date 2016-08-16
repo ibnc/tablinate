@@ -2,7 +2,7 @@
 
 ## Author(s)
 
-* [Isabelle Carter](http://github.com/ibnc)
+* [Isabelle Natalie Carter](http://github.com/ibnc)
 * [Kevin Collette](http://github.com/collettiquette)
 
 ## Description
