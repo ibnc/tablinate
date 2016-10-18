@@ -27,7 +27,7 @@ Tablinate is a ruby gem that takes arrays of hashes, ActiveRecord::Relation obje
         { :id => '3', :first_name => "Tom", :last_name => "Baker", :title => "Time Lord" },
         { :id => '4', :first_name => "David", :last_name => "Tennant", :title => "Time Lord" },
         { :id => '5', :first_name => "Christopher", :last_name => "Eccleston", :title => "Time Lord" }
-      ] 
+      ]
       haml :index
     end
 
@@ -125,9 +125,9 @@ Options are highly expandable, and support many useful notations. For example:
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' },
       { :column1 => 'value1', :column2 => 'value2', :column3 => 'value3' }
     ]
-    
+
     @table.tablinate(@table_params)
-    
+
     <table class='table'>
     <thead>
       <tr>
@@ -161,7 +161,7 @@ Options are highly expandable, and support many useful notations. For example:
     </table>
 ### Haml note
 
-When using haml, you may need to unescape html tags by: 
+When using haml, you may need to unescape html tags by:
 
     %body
       != [ { ... }, ... ].tablinate(...)
