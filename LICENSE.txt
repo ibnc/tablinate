@@ -1,4 +1,4 @@
-Copyright (c) 2013 Kevin Collette and Kyle Carter
+Copyright (c) 2013 Kevin Collette and Isabelle Carter
 
 MIT License
 
