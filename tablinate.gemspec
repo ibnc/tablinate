@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.version       = Tablinate::VERSION
   spec.summary       = "Generate html tables with activerecord objects!"
   spec.description   = "Tablinate is a ruby gem that takes arrays of hashes, ActiveRecord::Relation objects, or a JSON array of hashes, and converts them into html tables. It is intended for use in small projects or applications whose schemas are closely related to what a table's output should be."
-  spec.authors       = [ "Isabelle Carter", "Kevin Collette" ]
+  spec.authors       = [ "Isabelle Natalie Carter", "Kevin Collette" ]
   spec.email         = [ 'isabellenataliecarter@gmail.com', 'kevcollette@gmail.com' ]
   spec.files         = `git ls-files`.split($/)
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
