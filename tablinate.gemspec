@@ -5,7 +5,7 @@ require 'tablinate/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'tablinate'
-  spec.date          = '2013-07-30'
+  spec.date          = '2016-12-02'
   spec.version       = Tablinate::VERSION
   spec.summary       = "Generate html tables with activerecord objects!"
   spec.description   = "Tablinate is a ruby gem that takes arrays of hashes, ActiveRecord::Relation objects, or a JSON array of hashes, and converts them into html tables. It is intended for use in small projects or applications whose schemas are closely related to what a table's output should be."
