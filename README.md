@@ -9,6 +9,10 @@
 
 Tablinate is a ruby gem that takes arrays of hashes, ActiveRecord::Relation objects, or a JSON array of hashes, and converts them into html tables. It is intended for use in small projects or applications whose schemas are closely related to standard table formats.
 
+## Note
+
+This project is dead
+
 ## Install
 
     gem install tablinate
