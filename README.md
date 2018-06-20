@@ -5,13 +5,13 @@
 * [Isabelle Carter](http://github.com/ibnc)
 * [Kevin Collette](http://github.com/collettiquette)
 
+## Note
+
+This project is dead. It was something I made years ago with friends when we were still not great programmers. It was never a good idea, but it was fun to write none the less. This is still up because I see no reason to take it down, and I occasionally use this repo as a test repo on other projects.
+
 ## Description
 
 Tablinate is a ruby gem that takes arrays of hashes, ActiveRecord::Relation objects, or a JSON array of hashes, and converts them into html tables. It is intended for use in small projects or applications whose schemas are closely related to standard table formats.
-
-## Note
-
-This project is dead
 
 ## Install
 
