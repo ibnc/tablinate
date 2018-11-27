@@ -1,0 +1,82 @@
+{
+  "format_version": "3",
+  "name": "pip",
+  "group": "group2",
+  "label_template": "${COUNT}",
+  "lock_behavior": "none",
+  "mingle": {
+    "mql_grouping_conditions": "\"\""
+  },
+  "environment_variables": [
+
+  ],
+  "materials": [
+    {
+      "url": "git@github.com:ibnc/tablinate.git",
+      "branch": "master",
+      "shallow_clone": false,
+      "filter": {
+        "ignore": [
+          ""
+        ],
+        "whitelist": [
+
+        ]
+      },
+      "auto_update": true,
+      "type": "git"
+    }
+  ],
+  "stages": [
+    {
+      "name": "stage1",
+      "fetch_materials": true,
+      "never_cleanup_artifacts": false,
+      "clean_working_directory": false,
+      "approval": {
+        "type": "success",
+        "users": [
+
+        ],
+        "roles": [
+
+        ]
+      },
+      "environment_variables": [
+
+      ],
+      "jobs": [
+        {
+          "name": "defaultJob1",
+          "environment_variables": [
+
+          ],
+          "tabs": [
+
+          ],
+          "resources": [
+
+          ],
+          "artifacts": [
+
+          ],
+          "properties": [
+
+          ],
+          "run_instance_count": "0",
+          "tasks": [
+            {
+              "command": "ls",
+              "timeout": -1,
+              "arguments": [
+
+              ],
+              "run_if": "passed",
+              "type": "exec"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
